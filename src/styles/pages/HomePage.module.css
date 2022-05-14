@@ -1,0 +1,7 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 10%);
+  /* overflow-x: hidden; */
+  /* height: 100vh; */
+}
