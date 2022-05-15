@@ -1,19 +1,27 @@
-import { lazy, LazyExoticComponent } from "react";
-import { JSXComponent } from ".";
+
+import { JSXComponent } from '.'
+import HomePage from '../pages/HomePage'
+import LoginPage from '../pages/LoginPage'
 
 interface IRoute {
-  children?: IRoute[];
-  component: LazyExoticComponent<JSXComponent> | JSXComponent;
-  name: string;
-  path: string;
+  children?: IRoute[]
+  component: JSXComponent
+  name: string
+  path: string
+  exact?: boolean
 }
-
-const HomePage = lazy(() => import(/* webpackChunkName: "HomePage" */ "../pages/HomePage"));
 
 export const routes = [
   {
-    path: "/",
+    path: '/',
     component: HomePage,
-    name: "Inicio",
+    name: 'Inicio',
+    exact: true,
   },
-];
+  {
+    path: '/login',
+    component: LoginPage,
+    name: 'Login',
+    exact: false,
+  },
+]

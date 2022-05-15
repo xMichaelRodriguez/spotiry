@@ -1,10 +1,25 @@
-import { Suspense } from "react";
-import { BrowserRouter as Router, Switch, Route, NavLink, Redirect } from "react-router-dom";
-import logo from "../logo.svg";
+import { Suspense, useContext, useEffect } from 'react'
+import { BrowserRouter as Router, Switch, Route, NavLink, Redirect } from 'react-router-dom'
+import { AuthContext } from '../context/AuthContext'
+import logo from '../logo.svg'
 
-import { routes } from "./route";
+import { routes } from './route'
 
 export const Navigation = () => {
+  const { auth, handleAuth } = useContext(AuthContext)
+  useEffect(() => {
+    const _token = localStorage.getItem('token') || null
+    const hash = window.location.hash
+    window.location.hash = ''
+
+    if (!!_token && hash) {
+      const accessToken = hash.split('=')[1]
+      localStorage.setItem('token', accessToken)
+      handleAuth(accessToken)
+    } else {
+      handleAuth(_token)
+    }
+  }, [])
   return (
     <div>
       <Suspense fallback={<span>Loading...</span>}>
@@ -16,7 +31,7 @@ export const Navigation = () => {
                 {routes.map(({ path, name }) => (
                   <li key={path}>
                     <NavLink to={path} activeClassName="nav-active" exact>
-                      {name}
+                      {name}- {path}
                     </NavLink>
                   </li>
                 ))}
@@ -27,7 +42,7 @@ export const Navigation = () => {
               renders the first one that matches the current URL. */}
             <Switch>
               {routes.map(({ path, component: Component }) => (
-                <Route key={path} path={path} render={() => <Component />} />
+                <Route key={path} path={path} component={() => <Component />} exact />
               ))}
 
               <Redirect to={routes[0].path} />
@@ -36,5 +51,5 @@ export const Navigation = () => {
         </Router>
       </Suspense>
     </div>
-  );
-};
+  )
+}

@@ -37,15 +37,17 @@ interface IResponse {
 }
 
 export const GridMusic = () => {
-  const { data, loading, error } = useLyrics({ artist: 'Kevin Kaarl', song: 'San Lucas' })
-  console.log(data)
-  if (loading) return <div>Loading...</div>
+  // const { loading, lyrics, bio } = useLyrics({
+  //   artist: 'Kevin Kaarl',
+  //   song: 'San Lucas',
+  // })
 
-  if (error) return <code>{JSON.stringify(error, null, 2)}</code>
+  // if (loading) return <div>Loading...</div>
 
   return (
     <main className={styles.wrapper}>
-      {data && data.response.hits.map((hit: any) => <CardMusic key={hit.result.id} {...hit} />)}
+      {/* {JSON.stringify(lyrics, null, 3)}
+      {JSON.stringify(bio, null, 3)} */}
     </main>
   )
 }

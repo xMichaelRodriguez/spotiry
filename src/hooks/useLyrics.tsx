@@ -1,54 +1,37 @@
 import { useEffect, useRef, useState } from 'react'
-
-const { VITE_API_KEY } = import.meta.env
-
-const baseUrl = 'https://api.genius.com/'
+import { helpHttp } from '../lib/helpHttp'
 
 interface IProps {
   song?: string
   artist?: string
 }
-export const useLyrics = ({ artist }: IProps) => {
-  const [state, setState] = useState({
-    data: null,
-    loading: true,
-    error: null,
-  })
+export const useLyrics = ({ artist, song }: IProps) => {
+  const [lyrics, setLyrics] = useState('')
+  const [bio, setBio] = useState('')
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    setState({ data: null, loading: true, error: null })
-    fetch(`https://api.genius.com/search?q=${artist}&access_token=${VITE_API_KEY}`, {
-      //   method: 'GET',
-      //   mode: 'no-cors',
-      //   headers: {
-      //     'User-Agent': 'CompuServe Classic/1.22',
-      //     Authorization: `Bearer ${VITE_API_KEY} `,
-      //     'Access-Control-Allow-Origin': '*',
-      //     Accept: 'application/json',
-      //     Host: 'api.genius.com',
-      //   },
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        setState({
-          loading: false,
-          error: null,
-          data: data,
-        })
-      })
-      .catch((error) => {
-        setState({
-          loading: false,
-          error,
-          data: null,
-        })
-      })
-  }, [])
+    const fetchData = async () => {
+      const lyricsUrl = `https://api.lyrics.ovh/v1/${artist}/${song}`
+      const songUrl = ` theaudiodb.com/api/v1/json/2/search.php?s=${artist}`
+      setLoading(true)
+      const [songData, lyricsData] = await Promise.all([
+        helpHttp().get({ endPoint: songUrl }),
+        helpHttp().get({ endPoint: lyricsUrl }),
+      ])
+      console.log(songData, lyricsData)
+      setLyrics(lyricsData)
+      setBio(songData)
 
-  const { loading, data, error } = state
+      setLoading(false)
+    }
+
+    fetchData()
+  }, [artist, song])
+
   return {
     loading,
-    data,
-    error,
+    lyrics,
+    bio,
   }
 }
