@@ -1,27 +1,22 @@
+import { FiHome } from 'react-icons/fi';
+import { FaSignInAlt } from 'react-icons/fa';
+import { IRoute } from '../interfaces/interfaces';
+import HomePage from '../pages/HomePage';
+import LoginPage from '../pages/LoginPage';
 
-import { JSXComponent } from '.'
-import HomePage from '../pages/HomePage'
-import LoginPage from '../pages/LoginPage'
-
-interface IRoute {
-  children?: IRoute[]
-  component: JSXComponent
-  name: string
-  path: string
-  exact?: boolean
-}
-
-export const routes = [
+export const routes: IRoute[] = [
   {
     path: '/',
     component: HomePage,
     name: 'Inicio',
     exact: true,
+    icon: FiHome,
   },
   {
     path: '/login',
     component: LoginPage,
     name: 'Login',
     exact: false,
+    icon: FaSignInAlt,
   },
-]
+];

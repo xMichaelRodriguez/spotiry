@@ -1,33 +1,40 @@
-import { useContext } from 'react'
-import { GridMusic } from '../components/GridMusic'
-import { SearchComponent } from '../components/SearchComponent'
-import { AuthContext } from '../context/AuthContext'
-import { helpHttp } from '../lib/helpHttp'
-import Styles from '../styles/pages/HomePage.module.css'
+import { useContext } from 'react';
+import { GridMusic } from '../components/GridMusic';
+import { SearchComponent } from '../components/SearchComponent';
+import { AuthContext } from '../context/AuthContext';
+import { IResponseSongs } from '../interfaces/interfaces';
+import { helpHttp } from '../lib/helpHttp';
 
-const baseUrl = import.meta.env.VITE_BASE_URL
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
 export const HomePage = () => {
-  const { auth } = useContext(AuthContext);
-  
-  const handlePlay = () => {
-    console.log(auth)
+  const { auth, handleSongs } = useContext(AuthContext);
+
+  const handlePlay = async ({ query }: { query: string }) => {
     const options = {
       headers: {
         Authorization: `Bearer  ${auth}`,
       },
-    }
-    console.log(options)
-    const resp = helpHttp().get({ endPoint: `${baseUrl}me/playlists`, options })
-  }
-  return (
-    <div className={Styles.wrapper}>
-      <SearchComponent />
-      <GridMusic />
-      <button onClick={handlePlay} type="button">
-        click
-      </button>
-    </div>
-  )
-}
+    };
 
-export default HomePage
+    const resp = await helpHttp().get({
+      endPoint: `${baseUrl}search?type=album&include_external=audio&q=${query}`,
+      options,
+    });
+    const data: IResponseSongs = resp?.albums;
+
+    handleSongs(data);
+  };
+  return (
+    <main>
+      <SearchComponent handleSearch={handlePlay} />
+      <div>
+        <div>
+          <GridMusic />
+        </div>
+      </div>
+    </main>
+  );
+};
+
+export default HomePage;
