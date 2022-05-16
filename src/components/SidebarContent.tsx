@@ -1,4 +1,5 @@
 import { Box, BoxProps, CloseButton, Flex, Text, useColorModeValue } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 
 import { routes } from '../routes/route';
 import { NavItem } from './NavItem';
@@ -22,6 +23,7 @@ export const SidebarContent = ({ onClose, ...rest }: SidebarProps) => (
       </Text>
       <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
     </Flex>
+   
     {routes.map(({ path, name, icon }) => (
       <NavItem key={name} name={name} path={path} icon={icon} />
     ))}
