@@ -9,11 +9,28 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
+import { useContext, useState, useRef } from 'react';
+import { AuthContext } from '../context/AuthContext';
 import { Item } from '../interfaces/interfaces';
 import { helpHttp } from '../lib/helpHttp';
 import { CardMusicImage } from './CardMusicImage';
+const { VITE_BASE_URL } = import.meta.env;
+export const CardMusic = ({ name, artists, images, release_date, id, uri }: Item) => {
+  const reproductor = useRef(new Audio());
+  const { auth } = useContext(AuthContext);
 
-export const CardMusic = ({ name, artists, images, release_date, id }: Item) => {
+  const handlePlayMusic = async (id: string, uri: string) => {
+    
+    const options = {
+      headers: {
+        Authorization: `Bearer  ${auth}`,
+      },
+    };
+    const tracks = await helpHttp().get({ endPoint: `${VITE_BASE_URL}albums/${id}`, options });
+    const audioUri = tracks.tracks.items[0]['preview_url'];
+
+    reproductor.current.src = audioUri;
+  };
   return (
     <Center py={6}>
       <Stack
@@ -66,12 +83,11 @@ export const CardMusic = ({ name, artists, images, release_date, id }: Item) => 
             colorScheme="teal"
             variant={'solid'}
             w={'100%'}
-            onClick={() => {
-              console.log(id);
-            }}
+            onClick={() => handlePlayMusic(id, uri)}
           >
             Ver
           </Button>
+          <audio ref={reproductor} autoPlay></audio>
         </Stack>
       </Stack>
     </Center>
