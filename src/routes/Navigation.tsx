@@ -10,11 +10,12 @@ import { SideBar } from '../components/Sidebar';
 export const Navigation = () => {
   const { handleAuth } = useContext(AuthContext);
   useEffect(() => {
-    const _token = localStorage.getItem('token') || null;
+    const _token = localStorage.getItem('token') ?? null;
+
     const hash = window.location.hash;
     window.location.hash = '';
 
-    if (!!_token && hash) {
+    if (_token === null && hash) {
       const accessToken = hash.split('=')[1];
       localStorage.setItem('token', accessToken);
       handleAuth(accessToken);

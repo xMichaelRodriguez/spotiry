@@ -3,6 +3,7 @@ import { FaSignInAlt } from 'react-icons/fa';
 import { IRoute } from '../interfaces/interfaces';
 import HomePage from '../pages/HomePage';
 import LoginPage from '../pages/LoginPage';
+import AlbumPage from '../pages/AlbumPage';
 
 export const routes: IRoute[] = [
   {
@@ -11,6 +12,12 @@ export const routes: IRoute[] = [
     name: 'Inicio',
     exact: true,
     icon: FiHome,
+  },
+  {
+    path: '/album:id',
+    component: AlbumPage,
+    name: 'Album',
+    exact: true,
   },
   {
     path: '/login',

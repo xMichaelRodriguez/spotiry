@@ -4,32 +4,33 @@ import {
   Button,
   Center,
   Heading,
-  ModalFooter,
+
   Stack,
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { useContext, useState, useRef } from 'react';
+import { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { Item } from '../interfaces/interfaces';
-import { helpHttp } from '../lib/helpHttp';
+// import { helpHttp } from '../lib/helpHttp';
 import { CardMusicImage } from './CardMusicImage';
-const { VITE_BASE_URL } = import.meta.env;
+// const { VITE_BASE_URL } = import.meta.env;
 export const CardMusic = ({ name, artists, images, release_date, id, uri }: Item) => {
-  const reproductor = useRef(new Audio());
+  // const reproductor = useRef(new Audio());
   const { auth } = useContext(AuthContext);
+const history= useHistory()
+  const handlePlayMusic =  (id: string, uri: string) => {
+    history.push(`/album/${id}`)
+    // const options = {
+    //   headers: {
+    //     Authorization: `Bearer  ${auth}`,
+    //   },
+    // };
+    // const tracks = await helpHttp().get({ endPoint: `${VITE_BASE_URL}albums/${id}`, options });
+    // const audioUri = tracks.tracks.items[0]['preview_url'];
 
-  const handlePlayMusic = async (id: string, uri: string) => {
-    
-    const options = {
-      headers: {
-        Authorization: `Bearer  ${auth}`,
-      },
-    };
-    const tracks = await helpHttp().get({ endPoint: `${VITE_BASE_URL}albums/${id}`, options });
-    const audioUri = tracks.tracks.items[0]['preview_url'];
-
-    reproductor.current.src = audioUri;
+    //  reproductor.current.src = audioUri;
   };
   return (
     <Center py={6}>
@@ -83,11 +84,11 @@ export const CardMusic = ({ name, artists, images, release_date, id, uri }: Item
             colorScheme="teal"
             variant={'solid'}
             w={'100%'}
-            onClick={() => handlePlayMusic(id, uri)}
+            onClick={() => handlePlayMusic(id)}
           >
             Ver
           </Button>
-          <audio ref={reproductor} autoPlay></audio>
+          {/* <audio ref={reproductor} controls ></audio> */}
         </Stack>
       </Stack>
     </Center>
