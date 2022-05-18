@@ -22,6 +22,7 @@ export const Navigation = () => {
     } else {
       handleAuth(_token);
     }
+    
   }, []);
   return (
     <Router>

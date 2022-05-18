@@ -14,7 +14,7 @@ export const routes: IRoute[] = [
     icon: FiHome,
   },
   {
-    path: '/album:id',
+    path: '/album/:id',
     component: AlbumPage,
     name: 'Album',
     exact: true,
