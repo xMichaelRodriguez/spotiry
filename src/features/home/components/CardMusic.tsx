@@ -1,19 +1,16 @@
-const baseUrl = import.meta.env.VITE_BASE_URL;
-import { Badge, Button, Center, Heading, Stack, Text, useColorModeValue } from '@chakra-ui/react';
 import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
-import { Item } from '../interfaces/interfaces';
-// import { helpHttp } from '../lib/helpHttp';
-import { CardMusicImage } from './CardMusicImage';
-// const { VITE_BASE_URL } = import.meta.env;
-export const CardMusic = ({ name, artists, images, release_date, id, uri }: Item) => {
-  // const reproductor = useRef(new Audio());
-  const { auth } = useContext(AuthContext);
+import { Badge, Button, Center, Heading, Stack, Text, useColorModeValue } from '@chakra-ui/react';
+
+import { Item } from '../../../interfaces/interfaces';
+import { CardMusicImage } from '../../../components/CardMusicImage';
+
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
+export const CardMusic = ({ name, artists, images, release_date, id }: Item) => {
   const history = useHistory();
   const handlePlayMusic = (id: string) => {
     history.push(`/album/${id}`);
-    
   };
   return (
     <Center py={6}>
@@ -69,9 +66,8 @@ export const CardMusic = ({ name, artists, images, release_date, id, uri }: Item
             w={'100%'}
             onClick={() => handlePlayMusic(id)}
           >
-            Ver
+            Ver Album
           </Button>
-          {/* <audio ref={reproductor} controls ></audio> */}
         </Stack>
       </Stack>
     </Center>
