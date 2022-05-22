@@ -1,36 +1,16 @@
-const baseUrl = import.meta.env.VITE_BASE_URL;
-import {
-  Badge,
-  Button,
-  Center,
-  Heading,
-
-  Stack,
-  Text,
-  useColorModeValue,
-} from '@chakra-ui/react';
 import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
-import { Item } from '../interfaces/interfaces';
-// import { helpHttp } from '../lib/helpHttp';
-import { CardMusicImage } from './CardMusicImage';
-// const { VITE_BASE_URL } = import.meta.env;
-export const CardMusic = ({ name, artists, images, release_date, id, uri }: Item) => {
-  // const reproductor = useRef(new Audio());
-  const { auth } = useContext(AuthContext);
-const history= useHistory()
-  const handlePlayMusic =  (id: string, uri: string) => {
-    history.push(`/album/${id}`)
-    // const options = {
-    //   headers: {
-    //     Authorization: `Bearer  ${auth}`,
-    //   },
-    // };
-    // const tracks = await helpHttp().get({ endPoint: `${VITE_BASE_URL}albums/${id}`, options });
-    // const audioUri = tracks.tracks.items[0]['preview_url'];
+import { Badge, Button, Center, Heading, Stack, Text, useColorModeValue } from '@chakra-ui/react';
 
-    //  reproductor.current.src = audioUri;
+import { Item } from '../../../interfaces/interfaces';
+import { CardMusicImage } from '../../../components/CardMusicImage';
+
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
+export const CardMusic = ({ name, artists, images, release_date, id }: Item) => {
+  const history = useHistory();
+  const handlePlayMusic = (id: string) => {
+    history.push(`/album/${id}`);
   };
   return (
     <Center py={6}>
@@ -63,7 +43,7 @@ const history= useHistory()
             {name}
           </Heading>
           <Text fontWeight={600} color={'gray.500'} size="sm" mb={4}>
-            @{artists[0].name}
+            {/*  */}@{artists[0].name}
           </Text>
           <Text textAlign={'center'} color={useColorModeValue('gray.700', 'gray.400')} px={3}>
             Realese date: {release_date}
@@ -86,9 +66,8 @@ const history= useHistory()
             w={'100%'}
             onClick={() => handlePlayMusic(id)}
           >
-            Ver
+            Ver Album
           </Button>
-          {/* <audio ref={reproductor} controls ></audio> */}
         </Stack>
       </Stack>
     </Center>

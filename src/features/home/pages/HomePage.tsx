@@ -1,11 +1,10 @@
 import { useContext } from 'react';
 import { GridMusic } from '../components/GridMusic';
-import { SearchComponent } from '../components/SearchComponent';
-import { AuthContext } from '../context/AuthContext';
-import { IResponseSongs } from '../interfaces/interfaces';
-import { helpHttp } from '../lib/helpHttp';
-
-const baseUrl = import.meta.env.VITE_BASE_URL;
+import { SearchComponent } from '../../../components/SearchComponent';
+import { AuthContext } from '../../../context/AuthContext';
+import { IResponseSongs, Item } from '../../../interfaces/interfaces';
+import { baseUrl } from '../../../lib/baseUrl';
+import { helpHttp } from '../../../lib/helpHttp';
 
 export const HomePage = () => {
   const { auth, handleSongs } = useContext(AuthContext);
@@ -17,21 +16,25 @@ export const HomePage = () => {
       },
     };
 
-    const resp = await helpHttp().get({
+    const resp: { albums: IResponseSongs } = await helpHttp().get({
       endPoint: `${baseUrl}search?type=album&include_external=audio&q=${query}`,
       options,
     });
-    const data: IResponseSongs = resp?.albums;
 
-    handleSongs(data);
+    if (resp.albums) {
+      handleSongs(resp.albums);
+    } else {
+      alert('token expirado');
+      console.log(resp);
+      localStorage.clear();
+    }
   };
   return (
     <main>
       <SearchComponent handleSearch={handlePlay} />
+
       <div>
-        <div>
-          <GridMusic />
-        </div>
+        <GridMusic />
       </div>
     </main>
   );

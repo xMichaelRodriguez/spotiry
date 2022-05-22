@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }: props) => {
   const [auth, setAuth] = useState('');
   const [playList, setPlaylist] = useState<IPlayLists>(INITIAL_DATA);
   const [songs, setSongs] = useState<IResponseSongs>(INITIAL_SONGS);
-
+  const [songUri, setSongUri] = useState('');
   const handleAuth = (token: string) => {
     setAuth(token);
   };
@@ -52,6 +52,10 @@ export const AuthProvider = ({ children }: props) => {
     setSongs(songs);
   };
 
+  const handleSongUri = (uri: string) => {
+    setSongUri(uri);
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -61,6 +65,8 @@ export const AuthProvider = ({ children }: props) => {
         handlePlayList,
         songs,
         handleSongs,
+        songUri,
+        handleSongUri,
       }}
     >
       {children}
