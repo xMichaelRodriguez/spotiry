@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Center,
   Flex,
@@ -11,13 +12,13 @@ import {
 import { useContext, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
-import { CardMusicImage } from '../components/CardMusicImage';
+import { CardMusicImage } from '../../../components/CardMusicImage';
 import { ListMusicAlbum } from '../components/ListMusicAlbum';
-import { Reproductor } from '../components/Reproductor';
-import { AuthContext } from '../context/AuthContext';
-import { baseUrl } from '../lib/baseUrl';
-import { helpHttp } from '../lib/helpHttp';
-import { Image, Artist, ITrack } from '../interfaces/interfaces';
+import { Reproductor } from '../../../components/Reproductor';
+import { AuthContext } from '../../../context/AuthContext';
+import { baseUrl } from '../../../lib/baseUrl';
+import { helpHttp } from '../../../lib/helpHttp';
+import { Image, Artist, ITrack } from '../../../interfaces/interfaces';
 interface IMusicAlbum {
   id: string;
   artists: Artist[];
@@ -47,25 +48,22 @@ export const AlbumPage = () => {
 
   return (
     <Center py={6}>
-      <Stack
-        borderWidth="1px"
-        borderRadius="lg"
-        w={{ sm: '100%', md: '540px', lg: '720px' }}
-        height={{ sm: '476px', md: '25rem' }}
-        direction={{ base: 'column', md: 'row' }}
+      <Box
+        p={4}
+        display={{ lg: 'flex' }}
         bg={useColorModeValue('white', 'gray.900')}
+        borderRadius="2xl"
         boxShadow={'2xl'}
-        padding={4}
       >
-        <Flex flex={1}>
+        <Box flexShrink={0}>
           {album?.images[0].url !== undefined && (
             <CardMusicImage url={album?.images[0]?.url} width={300} height={300} />
           )}
-        </Flex>
+        </Box>
 
         <Stack
           flex={1}
-          flexDirection="column"
+          flexDirection={'column'}
           justifyContent="center"
           alignItems="center"
           p={1}
@@ -84,12 +82,13 @@ export const AlbumPage = () => {
             alignItems="center"
             p={1}
             pt={2}
+            w={'100%'}
           >
             <VStack
               justify={'center'}
               direction={'row'}
               mb={6}
-              maxHeight={150}
+              maxHeight={160}
               w={'100%'}
               overflowY="auto"
             >
@@ -100,10 +99,12 @@ export const AlbumPage = () => {
             </Stack>
           </Stack>
           <Stack>
-            <Button variant="solid" onClick={()=>history.goBack()}>Volver</Button>
+            <Button variant="solid" onClick={() => history.goBack()}>
+              Volver
+            </Button>
           </Stack>
         </Stack>
-      </Stack>
+      </Box>
     </Center>
   );
 };
