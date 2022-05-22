@@ -1,6 +1,6 @@
 import { CardMusic } from './CardMusic';
 
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../../../context/AuthContext';
 import { useContext } from 'react';
 import { SimpleGrid } from '@chakra-ui/react';
 
