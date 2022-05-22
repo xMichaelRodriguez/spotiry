@@ -3,7 +3,7 @@ import { FaSignInAlt } from 'react-icons/fa';
 import { IRoute } from '../interfaces/interfaces';
 import HomePage from '../features/home/pages/HomePage';
 import LoginPage from '../features/auth/pages/LoginPage';
-import AlbumPage from '../features/album/pages/AlbumPage.tsx';
+import AlbumPage from '../features/album/pages/AlbumPage';
 
 export const routes: IRoute[] = [
   {
