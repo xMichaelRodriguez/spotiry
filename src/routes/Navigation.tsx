@@ -9,6 +9,7 @@ import { SideBar } from '../components/Sidebar';
 
 export const Navigation = () => {
   const { handleAuth } = useContext(AuthContext);
+
   useEffect(() => {
     const _token = localStorage.getItem('token') ?? null;
 
@@ -19,10 +20,9 @@ export const Navigation = () => {
       const accessToken = hash.split('=')[1];
       localStorage.setItem('token', accessToken);
       handleAuth(accessToken);
-    } else {
+    } else if (_token !== null) {
       handleAuth(_token);
     }
-    
   }, []);
   return (
     <Router>

@@ -1,9 +1,10 @@
 import { FiHome } from 'react-icons/fi';
 import { FaSignInAlt } from 'react-icons/fa';
-import { IRoute } from '../interfaces/interfaces';
+
 import HomePage from '../features/home/pages/HomePage';
 import LoginPage from '../features/auth/pages/LoginPage';
 import AlbumPage from '../features/album/pages/AlbumPage';
+import { IRoute } from '../interfaces/routes.interface';
 
 export const routes: IRoute[] = [
   {
