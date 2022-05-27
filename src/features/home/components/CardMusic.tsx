@@ -1,11 +1,8 @@
-import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Badge, Button, Center, Heading, Stack, Text, useColorModeValue } from '@chakra-ui/react';
 
-import { Item } from '../../../interfaces/interfaces';
+import { Item } from '../../../interfaces/';
 import { CardMusicImage } from '../../../components/CardMusicImage';
-
-const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export const CardMusic = ({ name, artists, images, release_date, id }: Item) => {
   const history = useHistory();

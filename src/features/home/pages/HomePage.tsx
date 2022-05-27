@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { GridMusic } from '../components/GridMusic';
 import { SearchComponent } from '../../../components/SearchComponent';
 import { AuthContext } from '../../../context/AuthContext';
-import { IResponseSongs, Item } from '../../../interfaces/interfaces';
+import { IResponseSongs } from '../../../interfaces';
 import { baseUrl } from '../../../lib/baseUrl';
 import { helpHttp } from '../../../lib/helpHttp';
 

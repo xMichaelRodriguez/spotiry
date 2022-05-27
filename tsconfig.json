@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "ESNext",
+
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": false,
@@ -16,6 +17,11 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"],
+  "include": ["src", "tests"],
+  "exclude": [
+    "tests/**",
+    "./src/mocks/**"
+    //  "./src/test-utils"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { IPlayLists, IResponseSongs } from '../interfaces/interfaces';
+import { IPlayLists, IResponseSongs } from '../interfaces/';
 
 // export type AuthTokenProps = {
 //   token: string
@@ -9,7 +9,7 @@ import { IPlayLists, IResponseSongs } from '../interfaces/interfaces';
 
 export type AuthContextProps = {
   auth: string;
-  handleAuth: Function;
+  handleAuth: (auth: string) => void;
   playList: IPlayLists;
   handlePlayList: (playList: IPlayLists) => void;
   songs: IResponseSongs;
