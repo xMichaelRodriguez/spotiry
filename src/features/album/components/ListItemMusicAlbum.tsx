@@ -1,6 +1,6 @@
 import { Divider, ListItem } from '@chakra-ui/react';
 import { AuthContext } from '../../../context/AuthContext';
-import { IItemsTrack } from '../../../interfaces/interfaces';
+import { IItemsTrack } from '../../../interfaces/tracks.interface';
 import { useContext } from 'react';
 export const ListItemMusicAlbum = ({ name, preview_url }: IItemsTrack) => {
   const { handleSongUri } = useContext(AuthContext);

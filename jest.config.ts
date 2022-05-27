@@ -7,6 +7,7 @@ export default async (): Promise<Config.InitialOptions> => ({
     '^.+\\.(ts|tsx)$': 'ts-jest',
   },
   testEnvironment: 'jsdom',
+  detectOpenHandles: true,
 
   bail: 1,
   verbose: true,

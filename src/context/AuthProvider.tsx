@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { IPlayLists, IResponseSongs } from '../interfaces/interfaces';
+import { IPlayLists, IResponseSongs } from '../interfaces';
+
 import { AuthContext } from './AuthContext';
 
 const INITIAL_DATA: IPlayLists = {
