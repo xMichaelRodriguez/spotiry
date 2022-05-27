@@ -17,11 +17,15 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
+
   "include": ["src", "tests"],
   "exclude": [
     "tests/**",
     "./src/mocks/**"
     //  "./src/test-utils"
   ],
+
+  "include": ["src/*"],
+
   "references": [{ "path": "./tsconfig.node.json" }]
 }
